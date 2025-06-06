@@ -180,7 +180,7 @@ https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
 
 ## Laporan
 
-**Soal 2**
+## **Soal 2**
 ```
 // Yo/Gurt
         if (strcmp(buf, "yo") == 0) {
@@ -198,7 +198,7 @@ Percabangan ini terdapat pada fungsi shell dalam file shell.c. Fungsinya adalah 
 
 Perbandingan string dilakukan dengan fungsi strcmp() dari pustaka std_lib.c.
 
-**soal 3**
+## **soal 3**
 ```
  // Ganti username dengan "user nama"
         else if (is_user_command) {
@@ -233,7 +233,7 @@ soal ini menggunakan 2 percabangan :
 
 - Jika pengguna mengetik "user", maka nama pengguna akan diatur ulang ke "user" menggunakan strcpy().
 
-**soal 4**
+## **soal 4**
 ```
 else if(startsWith(buf,"grandcompany")){
             char cmd[4];
@@ -283,4 +283,4 @@ Jika argumen tidak dikenali → Output "unknown company".
 ### Tambahan
 - Perintah "clear" akan menghapus hostname dan mengembalikan warna terminal ke default putih (0x07).
 
-** Soal 5 **
+## **soal 5**
