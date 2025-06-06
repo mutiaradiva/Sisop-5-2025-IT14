@@ -284,3 +284,112 @@ Jika argumen tidak dikenali → Output "unknown company".
 - Perintah "clear" akan menghapus hostname dan mengembalikan warna terminal ke default putih (0x07).
 
 ## **soal 5**
+```
+// 4. Kalkulator: add, sub, mul, div
+        else if (startsWith(buf, "add ") || startsWith(buf, "sub ") ||
+                 startsWith(buf, "mul ") || startsWith(buf, "div ")) {
+            char cmd[4];
+            char args[2][64];
+            int x, y, result, valid, remainder;
+
+            parseCommand(buf, cmd, args);
+
+            x = stringToInt(args[0]);
+            y = stringToInt(args[1]);
+            result = 0;
+            valid = 1;
+
+            if (strcmp(cmd, "add") == 0) {
+                result = x + y;
+            } else if (strcmp(cmd, "sub") == 0) {
+                result = x - y;
+            } else if (strcmp(cmd, "mul") == 0) {
+                // Tangani tanda negatif
+                int sign = 1;
+                if (x < 0) {
+                    sign = -sign;
+                    x = -x;
+                }
+                if (y < 0) {
+                    sign = -sign;
+                    y = -y;
+                }
+
+                result = 0;
+                for (i = 0; i < y; i++) {
+                    result += x;
+                }
+
+                result = sign * result;
+            } else if (strcmp(cmd, "div") == 0) {
+                if (y == 0) {
+                    printString("Error: Division by zero\n");
+                    valid = 0;
+                } else {
+                    // Tangani tanda negatif
+                    int sign = 1;
+                    if (x < 0) {
+                        sign = -sign;
+                        x = -x;
+                    }
+                    if (y < 0) {
+                        sign = -sign;
+                        y = -y;
+                    }
+
+                    result = 0;
+                    remainder = x;
+                    while (remainder >= y) {
+                        remainder -= y;
+                        result++;
+                    }
+
+                    result = sign * result;
+                }
+            }
+
+            if (valid) {
+                intToString(result, num_buf);
+                printString(num_buf);
+                printString("\r\n");
+            }
+        }
+```
+
+### Penjelasan
+Percabangan di atas digunakan untuk menangani operasi aritmetika dasar (add, sub, mul, dan div) di dalam fungsi shell. Fungsi ini akan mengeksekusi operasi sesuai perintah yang diberikan oleh pengguna.
+
+### Proses Utama:
+1. Program mengecek apakah input diawali dengan "add ", "sub ", "mul ", atau "div ".
+
+2. Menggunakan parseCommand() untuk memisahkan perintah (cmd) dan dua argumen angka (args[0] dan args[1]).
+
+3. Angka dikonversi dari string ke integer menggunakan stringToInt().
+
+4 Operasi dilakukan berdasarkan jenis perintah:
+
+- add: Menjumlahkan dua angka.
+
+- sub: Mengurangkan dua angka.
+
+- mul: Perkalian dengan penjumlahan berulang.
+
+- div: Pembagian dengan pengurangan berulang.
+
+### Penanganan Khusus:
+Untuk mul dan div, tanda negatif ditangani secara manual menggunakan variabel sign.
+
+Untuk div, terdapat pemeriksaan pembagi nol:
+
+- Jika y == 0, maka akan menampilkan pesan:
+
+```
+Error: Division by zero
+```
+
+- Operasi dibatalkan dengan valid = 0.
+
+### Hasil:
+- Jika operasi valid, hasil akan dikonversi kembali ke string menggunakan intToString() dan ditampilkan menggunakan printString().
+
+## **Soal 6**
