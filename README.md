@@ -1,11 +1,12 @@
-# Sisop-5-2025-IT-Template
+# LAPRES Praktikum Sistem Operasi Modul 5 - IT14
 
 ## Kelompok
 
 Nama | NRP
 --- | ---
-Amoes Noland | 5027231028
-Rafi' Afnaan Fathurrahman | 5027231040
+Muhammad Fatihul Qolbi Ash Shiddiqi | 5027241023
+Mutiara Diva Jaladitha | 5027241083
+M. Faqih Ridho | 5027241123
 
 ## Daftar Isi
 
@@ -179,4 +180,107 @@ https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
 
 ## Laporan
 
-> Isi sesuai pengerjaan.
+**Soal 2**
+```
+// Yo/Gurt
+        if (strcmp(buf, "yo") == 0) {
+            printString("gurt\n");
+        } else if (strcmp(buf, "gurt") == 0) {
+            printString("yo\r\n");
+        }
+```
+### Penjelasan
+Percabangan ini terdapat pada fungsi shell dalam file shell.c. Fungsinya adalah memberikan respons interaktif berdasarkan input pengguna:
+
+- Jika pengguna mengetikkan "yo", maka program akan mencetak "gurt".
+
+- Jika pengguna mengetikkan "gurt", maka program akan mencetak "yo".
+
+Perbandingan string dilakukan dengan fungsi strcmp() dari pustaka std_lib.c.
+
+**soal 3**
+```
+ // Ganti username dengan "user nama"
+        else if (is_user_command) {
+            for (i = 5, j = 0; buf[i] != '\0' && j < 31; i++, j++) {
+                username[j] = buf[i];
+            }
+            username[j] = '\0';
+            printString("Username changed to ");
+            printString(username);
+            printString("\r\n");
+        }
+
+        //  Reset username ke "user"
+        else if (strcmp(buf, "user") == 0) {
+            strcpy(username, "user");
+            printString("Username changed to user\n");
+        }
+```
+
+### Penjelasan
+soal ini menggunakan 2 percabangan :
+
+1. Mengganti username:
+
+- Program membaca input mulai dari indeks ke-5 (user diabaikan) untuk mengambil nama baru.
+
+- Username dibatasi hingga 31 karakter untuk mencegah buffer overflow.
+
+- Setelah itu, username ditampilkan melalui printString.
+
+2. Reset username ke default:
+
+- Jika pengguna mengetik "user", maka nama pengguna akan diatur ulang ke "user" menggunakan strcpy().
+
+**soal 4**
+```
+else if(startsWith(buf,"grandcompany")){
+            char cmd[4];
+            char args[2][64];
+            parseCommand(buf, cmd, args);
+            // printString(args[0]);
+            if (strcmp(args[0],"maelstrom") == 0){                
+                setTerminalColor(0x0c);
+                strcpy(hostname,"@storm");
+                clearScreen(color_code);
+            }else if(strcmp(args[0],"twinadder") == 0){                
+                setTerminalColor(0x0e);
+                strcpy(hostname,"@serpent");
+                clearScreen(color_code);
+            }else if(strcmp(args[0],"immortalflames") == 0){                
+                setTerminalColor(0x09);
+                strcpy(hostname,"@flame");
+                clearScreen(color_code);
+            }else{
+                printString("unknown company");
+            }
+            printString("\r\n");        
+        }
+
+else if (strcmp(buf, "clear") == 0) {
+            strcpy(hostname,"");
+            clearScreen(0x07);
+            break;            
+        }
+```
+### Penjelasan
+Percabangan ini berfungsi untuk mengganti warna teks terminal dan hostname berdasarkan perintah "grandcompany <nama>".
+
+- startsWith(buf, "grandcompany") memastikan bahwa perintah diawali dengan keyword tersebut.
+
+- Kemudian parseCommand() akan memisahkan argumen perintah menjadi cmd dan args.
+
+### Detail Implementasi
+- "maelstrom" → Warna merah (0x0c), hostname menjadi @storm.
+
+- "twinadder" → Warna kuning (0x0e), hostname menjadi @serpent.
+
+- "immortalflames" → Warna biru (0x09), hostname menjadi @flame.
+
+Jika argumen tidak dikenali → Output "unknown company".
+
+### Tambahan
+- Perintah "clear" akan menghapus hostname dan mengembalikan warna terminal ke default putih (0x07).
+
+** Soal 5 **
