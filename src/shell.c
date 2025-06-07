@@ -9,30 +9,35 @@ char hostname[16] = "";
 int color_code;
 
 void banner(char* username, char* hostname) {
-//   printString("[");
-  printString(username);
-  printString(hostname);
-  printString("> ");
+    printString(username);
+    printString(hostname);
+    printString("> ");
 }
 
 void setTerminalColor(int code) {
     color_code = code;
 }
 
+void clearBuffer(char* buffer, int size) {
+    int i;
+    for (i = 0; i < size; i++) {
+        buffer[i] = '\0';
+    }
+}
+
 void shell() {
-   
     int i, j;
-    int is_user_command;  // pindah ke sini
+    int is_user_command;
 
     strcpy(username, "user");
+    clearBuffer(hostname, sizeof(hostname));
     printString("Welcome to EorzeOS!\r\n");
-    
-
 
     while (1) {
-        banner(username,hostname);
-        // printString(username);        
-        // printString("> ");
+        // Pastikan buffer bersih sebelum setiap iterasi
+        clearBuffer(buf, sizeof(buf));
+        clearBuffer(num_buf, sizeof(num_buf));
+        banner(username, hostname);
         readString(buf);
 
         is_user_command = (buf[0] == 'u' && buf[1] == 's' && buf[2] == 'e' &&
@@ -62,33 +67,30 @@ void shell() {
             printString("Username changed to user\n");
         }
 
-        else if(startsWith(buf,"grandcompany")){
+        // 4. Grandcompany
+        else if (startsWith(buf, "grandcompany")) {
             char cmd[4];
             char args[2][64];
             parseCommand(buf, cmd, args);
-            // printString(args[0]);
-            if (strcmp(args[0],"maelstrom") == 0){                
+            if (strcmp(args[0], "maelstrom") == 0) {
                 setTerminalColor(0x0c);
-                strcpy(hostname,"@storm");
+                strcpy(hostname, "@storm");
                 clearScreen(color_code);
-            }else if(strcmp(args[0],"twinadder") == 0){                
+            } else if (strcmp(args[0], "twinadder") == 0) {
                 setTerminalColor(0x0e);
-                strcpy(hostname,"@serpent");
+                strcpy(hostname, "@serpent");
                 clearScreen(color_code);
-            }else if(strcmp(args[0],"immortalflames") == 0){                
+            } else if (strcmp(args[0], "immortalflames") == 0) {
                 setTerminalColor(0x09);
-                strcpy(hostname,"@flame");
+                strcpy(hostname, "@flame");
                 clearScreen(color_code);
-            }else{
-                printString("unkown company");
+            } else {
+                printString("unknown company");
             }
             printString("\r\n");
-           
-
-            
         }
 
-        // 4. Kalkulator: add, sub, mul, div
+        // 5. Kalkulator: add, sub, mul, div
         else if (startsWith(buf, "add ") || startsWith(buf, "sub ") ||
                  startsWith(buf, "mul ") || startsWith(buf, "div ")) {
             char cmd[4];
@@ -107,7 +109,6 @@ void shell() {
             } else if (strcmp(cmd, "sub") == 0) {
                 result = x - y;
             } else if (strcmp(cmd, "mul") == 0) {
-                // Tangani tanda negatif
                 int sign = 1;
                 if (x < 0) {
                     sign = -sign;
@@ -129,7 +130,6 @@ void shell() {
                     printString("Error: Division by zero\n");
                     valid = 0;
                 } else {
-                    // Tangani tanda negatif
                     int sign = 1;
                     if (x < 0) {
                         sign = -sign;
@@ -152,32 +152,53 @@ void shell() {
             }
 
             if (valid) {
+                clearBuffer(num_buf, sizeof(num_buf)); // Bersihkan sebelum digunakan
                 intToString(result, num_buf);
                 printString(num_buf);
                 printString("\r\n");
+                clearBuffer(num_buf, sizeof(num_buf)); // Bersihkan setelah digunakan
             }
         }
 
-        // 5. Exit
+        // 6. Exit
         else if (strcmp(buf, "clear") == 0) {
-            strcpy(hostname,"");
+            strcpy(hostname, "");
             clearScreen(0x07);
-            break;            
+            break;
         }
 
+        // 7. Yogurt
         else if (strcmp(buf, "yogurt") == 0) {
-            int tick;
             char answer[3][100];
-            tick = mod(getBiosTick(),3);            
-            strcpy(answer[0],"yo");
-            strcpy(answer[1],"ts unami gng </3");
-            strcpy(answer[2],"sygau");
-            
+            char prev_username[32];
+            int tick;
+
+            // Simpan username sebelumnya untuk dipulihkan nanti
+            strcpy(prev_username, username);
+
+            // Ubah prompt menjadi "gurt"
+            strcpy(username, "gurt");
+
+            // Tampilkan prompt "gurt>" segera setelah input "yogurt"
+            banner(username, hostname);
+
+            // Siapkan semua jawaban
+            strcpy(answer[0], "yo");
+            strcpy(answer[1], "ts unami gng </3");
+            strcpy(answer[2], "sygau");
+
+            // Pilih satu jawaban secara acak menggunakan tick BIOS
+            tick = mod(getBiosTick(), 3);
+
+            // Tampilkan hanya jawaban yang dipilih
             printString(answer[tick]);
             printString("\r\n");
+
+            // Pulihkan username ke nilai sebelumnya
+            strcpy(username, prev_username);
         }
 
-        // 6. Echo
+        // 8. Echo
         else {
             printString(buf);
             printString("\r\n");
@@ -190,6 +211,11 @@ void parseCommand(char *buf, char *cmd, char args[2][64]) {
     int arg_num = 0;
     int char_pos = 0;
     int in_word = 0;
+
+    // Bersihkan cmd dan args sebelum digunakan
+    clearBuffer(cmd, 4);
+    clearBuffer(args[0], 64);
+    clearBuffer(args[1], 64);
 
     while (buf[i] != '\0') {
         if (buf[i] == ' ' || buf[i] == '\t') {
@@ -249,6 +275,9 @@ void intToString(int num, char *buf) {
     int digit;
     int temp;
     int reduced;
+
+    // Bersihkan buffer sebelum digunakan
+    clearBuffer(buf, 16);
 
     if (num < 0) {
         is_neg = 1;
