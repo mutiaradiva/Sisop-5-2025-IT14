@@ -205,7 +205,7 @@ Percabangan ini merupakan fallback (cadangan) jika input dari pengguna tidak coc
 3. Diikuti dengan karakter \r\n (carriage return dan line feed) agar output rapi dan berpindah ke baris baru.
    
 ### Output
-![output](assets/output%20nomer%201.png)
+<img src="assets/output nomer 1.png" alt="output" width="400">
 
 ## **Soal 2**
 ```
