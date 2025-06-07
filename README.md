@@ -226,7 +226,7 @@ Percabangan ini terdapat pada fungsi shell dalam file shell.c. Fungsinya adalah 
 Perbandingan string dilakukan dengan fungsi strcmp() dari pustaka std_lib.c.
 
 ### Output
-![output](assets/output%20nomer%202.png)
+<img src="assets/output nomer 2.png" alt="output" width="400">
 
 
 ## **soal 3**
@@ -265,7 +265,7 @@ soal ini menggunakan 2 percabangan :
 - Jika pengguna mengetik "user", maka nama pengguna akan diatur ulang ke "user" menggunakan strcpy().
 
 ### Output
-![output](assets/output%20nomer%203.png)
+<img src="assets/output nomer 3.png" alt="output" width="400">
 
 ## **soal 4**
 ```
@@ -321,13 +321,13 @@ Jika argumen tidak dikenali → Output "unknown company".
 - Perintah "clear" akan menghapus hostname dan mengembalikan warna terminal ke default putih (0x07).
 
 ### Output
-![output](assets/output%20nomer%204%20(1).png)
+<img src="assets/output nomer 4 (1).png" alt="output" width="400">
 
-![output](assets/output%20nomer%204%20(2).png)
+<img src="assets/output nomer 4 (2).png" alt="output" width="400">
 
-![output](assets/output%20nomer%204%20(3).png)
+<img src="assets/output nomer 4 (3).png" alt="output" width="400">
 
-![output](assets/output%20nomer%204%20(4).png)
+<img src="assets/output nomer 4 (4).png" alt="output" width="400">
 
 ## **soal 5**
 ```
@@ -443,7 +443,7 @@ Error: Division by zero
 - Jika operasi valid, hasil akan dikonversi kembali ke string menggunakan intToString() dan ditampilkan menggunakan printString().
 
 ### Output
-![output](assets/output%20nomer%205.png)
+<img src="assets/output nomer 5.png" alt="output" width="400">
 
 ## **Soal 6**
 
@@ -509,4 +509,4 @@ Percabangan ini menangani perintah khusus ketika pengguna mengetik "yogurt". Pro
 - Fungsi mod(), getBiosTick(), strcpy(), dan printString() merupakan bagian dari utilitas sistem yang digunakan untuk manipulasi data dan I/O.
 
 ### Output
-![output](assets/Output%20nomer%206.jpeg)
+<img src="assets/Output nomer 6.jpeg" alt="output" width="400">
