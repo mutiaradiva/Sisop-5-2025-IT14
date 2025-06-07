@@ -510,3 +510,78 @@ Percabangan ini menangani perintah khusus ketika pengguna mengetik "yogurt". Pro
 
 ### Output
 <img src="assets/Output nomer 6.jpeg" alt="output" width="400">
+
+## **Soal 7**
+```
+CFLAGS = -ansi -Iinclude
+```
+**Menentukan opsi kompilasi:**
+
+-ansi: Mengaktifkan mode ANSI C.
+
+-Iinclude: Menambahkan direktori include sebagai tempat mencari header file.
+
+```
+prepare:
+	dd if=/dev/zero of=bin/floppy.img bs=512 count=2880
+```
+- Membuat image floppy kosong sebesar 1,44 MB (2880 sektor × 512 byte).
+
+- File output: bin/floppy.img.
+
+```
+bootloader:
+	nasm -f bin src/bootloader.asm -o bin/bootloader.bin
+	dd if=bin/bootloader.bin of=bin/floppy.img bs=512 count=1 conv=notrunc
+```
+- Mengompilasi file bootloader dari Assembly (bootloader.asm) menjadi binary (bootloader.bin).
+
+- Menyalin bootloader ke sektor pertama (boot sector) pada floppy.img.
+
+```
+stdlib:
+	bcc $(CFLAGS) -c src/std_lib.c -o bin/std_lib.o
+```
+- Mengompilasi std_lib.c menjadi file objek std_lib.o dengan kompiler bcc (Bruce's C Compiler).
+
+```
+shell:
+	bcc $(CFLAGS) -c src/shell.c -o bin/shell.o
+```
+- Mengompilasi shell ke dalam objek shell.o.
+
+```
+kernel:
+	nasm -f as86 src/kernel.asm -o bin/kernel-asm.o
+	bcc $(CFLAGS) -c src/kernel.c -o bin/kernel.o
+```
+**Kernel dibagi menjadi 2 bagian:**
+
+- Bagian Assembly (kernel.asm) dikompilasi dengan nasm ke objek kernel-asm.o.
+
+- Bagian C (kernel.c) dikompilasi dengan bcc ke objek kernel.o.
+
+```
+link:
+	ld86 -o bin/kernel.bin -d bin/kernel.o bin/kernel-asm.o  bin/std_lib.o bin/shell.o
+	dd if=bin/kernel.bin of=bin/floppy.img bs=512 seek=1 conv=notrunc
+```
+- Menautkan semua file objek menjadi satu file kernel binary (kernel.bin) dengan ld86.
+
+- Menyalin kernel ke sektor kedua dan seterusnya pada image floppy.img.
+
+```
+build: prepare bootloader stdlib shell kernel link
+```
+- Menjalankan semua langkah secara berurutan untuk membangun image OS lengkap.
+
+```
+clean:
+	rm bin/*
+```
+- Menghapus semua file hasil kompilasi dan file image dari direktori bin.
+
+```
+all: clean build
+```
+- Membersihkan seluruh build lalu menjalankan build dari awal.
