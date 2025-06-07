@@ -512,6 +512,22 @@ Percabangan ini menangani perintah khusus ketika pengguna mengetik "yogurt". Pro
 <img src="assets/Output nomer 6.jpeg" alt="output" width="400">
 
 ## **Soal 7**
+
+### Penjelasan
+Makefile ini digunakan untuk membangun sistem operasi sederhana, yang terdiri dari berbagai komponen seperti bootloader, kernel, shell, dan pustaka standar. Makefile memberikan perintah otomatis untuk:
+
+- Mempersiapkan image disket
+
+- Mengompilasi file sumber (assembly dan C)
+
+- Menautkan (link) file objek menjadi kernel
+
+- Menulis kernel ke image disket
+
+- Membersihkan file hasil kompilasi
+
+File ini cocok dijalankan pada sistem Unix/Linux menggunakan make.
+
 ```
 CFLAGS = -ansi -Iinclude
 ```
