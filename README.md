@@ -180,6 +180,33 @@ https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
 
 ## Laporan
 
+## **Soal 1**
+```
+else {
+            printString(buf);
+            printString("\r\n");
+        }
+```
+### Penjelasan
+Percabangan ini merupakan fallback (cadangan) jika input dari pengguna tidak cocok dengan kondisi atau perintah manapun yang telah didefinisikan sebelumnya dalam fungsi shell().
+
+**Fungsi**
+- Menampilkan kembali input yang tidak dikenali ke layar.
+
+- Mencegah input tidak valid untuk "tidak melakukan apa-apa".
+
+- Memberikan umpan balik langsung ke pengguna bahwa perintahnya belum didukung atau salah ketik.
+
+**Cara Kerja:**
+1.Jika semua kondisi if, else if, dan penanganan khusus seperti "yo", "gurt", "add", "mul", "grandcompany", dll. tidak terpenuhi, maka masuk ke blok else ini.
+
+2. Program mencetak kembali buf (yaitu string input dari pengguna).
+
+3. Diikuti dengan karakter \r\n (carriage return dan line feed) agar output rapi dan berpindah ke baris baru.
+   
+### Output
+![output](assets/output%20nomer%201.png)
+
 ## **Soal 2**
 ```
 // Yo/Gurt
@@ -197,6 +224,10 @@ Percabangan ini terdapat pada fungsi shell dalam file shell.c. Fungsinya adalah 
 - Jika pengguna mengetikkan "gurt", maka program akan mencetak "yo".
 
 Perbandingan string dilakukan dengan fungsi strcmp() dari pustaka std_lib.c.
+
+### Output
+![output](assets/output%20nomer%202.png)
+
 
 ## **soal 3**
 ```
@@ -233,6 +264,9 @@ soal ini menggunakan 2 percabangan :
 
 - Jika pengguna mengetik "user", maka nama pengguna akan diatur ulang ke "user" menggunakan strcpy().
 
+### Output
+![output](assets/output%20nomer%203.png)
+
 ## **soal 4**
 ```
 else if(startsWith(buf,"grandcompany")){
@@ -265,6 +299,7 @@ else if (strcmp(buf, "clear") == 0) {
         }
 ```
 ### Penjelasan
+ 
 Percabangan ini berfungsi untuk mengganti warna teks terminal dan hostname berdasarkan perintah "grandcompany <nama>".
 
 - startsWith(buf, "grandcompany") memastikan bahwa perintah diawali dengan keyword tersebut.
@@ -272,6 +307,7 @@ Percabangan ini berfungsi untuk mengganti warna teks terminal dan hostname berda
 - Kemudian parseCommand() akan memisahkan argumen perintah menjadi cmd dan args.
 
 ### Detail Implementasi
+
 - "maelstrom" → Warna merah (0x0c), hostname menjadi @storm.
 
 - "twinadder" → Warna kuning (0x0e), hostname menjadi @serpent.
@@ -281,7 +317,17 @@ Percabangan ini berfungsi untuk mengganti warna teks terminal dan hostname berda
 Jika argumen tidak dikenali → Output "unknown company".
 
 ### Tambahan
+
 - Perintah "clear" akan menghapus hostname dan mengembalikan warna terminal ke default putih (0x07).
+
+### Output
+![output](assets/output%20nomer%204%20(1).png)
+
+![output](assets/output%20nomer%204%20(2).png)
+
+![output](assets/output%20nomer%204%20(3).png)
+
+![output](assets/output%20nomer%204%20(4).png)
 
 ## **soal 5**
 ```
@@ -357,9 +403,11 @@ Jika argumen tidak dikenali → Output "unknown company".
 ```
 
 ### Penjelasan
+
 Percabangan di atas digunakan untuk menangani operasi aritmetika dasar (add, sub, mul, dan div) di dalam fungsi shell. Fungsi ini akan mengeksekusi operasi sesuai perintah yang diberikan oleh pengguna.
 
-### Proses Utama:
+**Proses Utama**
+
 1. Program mengecek apakah input diawali dengan "add ", "sub ", "mul ", atau "div ".
 
 2. Menggunakan parseCommand() untuk memisahkan perintah (cmd) dan dua argumen angka (args[0] dan args[1]).
@@ -376,7 +424,8 @@ Percabangan di atas digunakan untuk menangani operasi aritmetika dasar (add, sub
 
 - div: Pembagian dengan pengurangan berulang.
 
-### Penanganan Khusus:
+**Penanganan Khusus**
+
 Untuk mul dan div, tanda negatif ditangani secara manual menggunakan variabel sign.
 
 Untuk div, terdapat pemeriksaan pembagi nol:
@@ -389,7 +438,75 @@ Error: Division by zero
 
 - Operasi dibatalkan dengan valid = 0.
 
-### Hasil:
+**Hasil**
+
 - Jika operasi valid, hasil akan dikonversi kembali ke string menggunakan intToString() dan ditampilkan menggunakan printString().
 
+### Output
+![output](assets/output%20nomer%205.png)
+
 ## **Soal 6**
+
+```
+else if (strcmp(buf, "yogurt") == 0) {
+    int tick;
+    char answer[3][100];
+    tick = mod(getBiosTick(), 3);            
+    strcpy(answer[0], "yo");
+    strcpy(answer[1], "ts unami gng </3");
+    strcpy(answer[2], "sygau");
+
+    printString(answer[tick]);
+    printString("\r\n");
+
+    // Ganti prompt ke "gurt>" sekali saja
+    printString("gurt> ");
+    readString(buf);  // baca input berikutnya langsung di sini
+
+    continue;  // langsung lanjut ke iterasi berikutnya
+}
+
+```
+
+### Penjelasan
+
+Percabangan ini menangani perintah khusus ketika pengguna mengetik "yogurt". Program akan memberikan respons acak dari tiga pilihan, serta mengubah prompt terminal menjadi "gurt>" hanya untuk satu kali input berikutnya.
+
+**Langkah-Langkah**
+
+1. Inisialisasi Array Jawaban:
+
+- answer[0] = "yo"
+
+- answer[1] = "ts unami gng </3"
+
+- answer[2] = "sygau"
+
+2. Pemilihan Acak Jawaban:
+
+- Menggunakan getBiosTick() untuk mengambil waktu sistem, lalu dihitung modulus 3 (mod(getBiosTick(), 3)) untuk mendapatkan nilai antara 0 hingga 2.
+
+- Nilai ini menentukan indeks jawaban yang akan dicetak.
+
+3. Output Jawaban:
+
+- Program mencetak string dari array answer[tick] dan diikuti oleh baris baru (\r\n).
+
+4. Prompt Dinamis:
+
+- Setelah mencetak jawaban, prompt diganti menjadi "gurt> ".
+
+- Pengguna langsung diminta memasukkan input baru dengan readString(buf).
+
+5. Lanjut Iterasi:
+
+- Dengan continue, program kembali ke awal loop shell() tanpa menjalankan bagian bawah fungsi.
+
+**Catatan Khusus**
+
+- Prompt "gurt> " hanya muncul sekali setelah "yogurt". Iterasi selanjutnya akan kembali menggunakan prompt normal.
+
+- Fungsi mod(), getBiosTick(), strcpy(), dan printString() merupakan bagian dari utilitas sistem yang digunakan untuk manipulasi data dan I/O.
+
+### Output
+![output](assets/Output%20nomer%206.jpeg)
