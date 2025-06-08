@@ -17,8 +17,9 @@ M. Faqih Ridho | 5027241123
   - [Source](#source)
   - [Headers](#headers)
   - [Makefile](#makefile)
-  - [Video Demonstrasi](#video-demonstrasi)
+  - [Video Demonstrasi Soal](#video-demonstrasi-soal)
 - [Laporan](#laporan)
+- [Video Demonstrasi Praktikan](#video-demonstrasi-praktikan)
 
 ## Soal
 
@@ -170,6 +171,13 @@ Pada suatu hari, anda merasa sangat lelah dari segala macam praktikum yang sudah
    * `kernel` : mengkompilasi `kernel.c` menjadi `kernel.o` pada direktori `bin/` dan mengkompilasi `kernel.asm` menjadi `kernel_asm.o` pada direktori `bin/`.
    * `link` : menggabungkan `bootloader.bin`, `kernel.o`, `kernel_asm.o`, dan `std_lib.o` menjadi `floppy.img`.
    * `build` : menjalankan perintah `prepare`, `bootloader`, `stdlib`, `kernel`, dan `link`.
+
+### Video Demonstrasi Soal
+
+[Akses Video dalam Assets](./assets/demo.mp4)
+
+https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
+
 
 ## Laporan
 
@@ -596,8 +604,8 @@ all: clean build
 - Membersihkan seluruh build lalu menjalankan build dari awal.
 
 
-### Video Demonstrasi
+### Video Demonstrasi Praktikan
 
-[Akses Video dalam Assets](./assets/demo.mp4)
+[Akses Video dalam Assets](./assets/demo_praktikan.mp4)
 
-https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
+https://github.com/user-attachments/assets/07fd57db-36af-4069-b54a-c7b4d9555d53
