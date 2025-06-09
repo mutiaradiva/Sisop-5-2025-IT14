@@ -182,7 +182,7 @@ https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
 ## Laporan
 
 ## **Soal 1**
-```
+```C
 else {
             printString(buf);
             printString("\r\n");
@@ -198,18 +198,17 @@ Percabangan ini merupakan fallback (cadangan) jika input dari pengguna tidak coc
 
 - Memberikan umpan balik langsung ke pengguna bahwa perintahnya belum didukung atau salah ketik.
 
-**Cara Kerja:**
-1.Jika semua kondisi if, else if, dan penanganan khusus seperti "yo", "gurt", "add", "mul", "grandcompany", dll. tidak terpenuhi, maka masuk ke blok else ini.
+**Cara Kerja:** 
 
+1. Jika semua kondisi if, else if, dan penanganan khusus seperti "yo", "gurt", "add", "mul", "grandcompany", dll. tidak terpenuhi, maka masuk ke blok else ini.
 2. Program mencetak kembali buf (yaitu string input dari pengguna).
-
 3. Diikuti dengan karakter \r\n (carriage return dan line feed) agar output rapi dan berpindah ke baris baru.
    
 ### Output
 <img src="assets/output nomer 1.png" alt="output" width="400">
 
 ## **Soal 2**
-```
+```C 
 // Yo/Gurt
         if (strcmp(buf, "yo") == 0) {
             printString("gurt\n");
@@ -231,7 +230,7 @@ Perbandingan string dilakukan dengan fungsi strcmp() dari pustaka std_lib.c.
 
 
 ## **soal 3**
-```
+```C
  // Ganti username dengan "user nama"
         else if (is_user_command) {
             for (i = 5, j = 0; buf[i] != '\0' && j < 31; i++, j++) {
@@ -269,7 +268,7 @@ soal ini menggunakan 2 percabangan :
 <img src="assets/output nomer 3.png" alt="output" width="400">
 
 ## **soal 4**
-```
+```C
 else if(startsWith(buf,"grandcompany")){
             char cmd[4];
             char args[2][64];
@@ -331,7 +330,7 @@ Jika argumen tidak dikenali → Output "unknown company".
 <img src="assets/output nomer 4 (4).png" alt="output" width="400">
 
 ## **soal 5**
-```
+```C
 // 4. Kalkulator: add, sub, mul, div
         else if (startsWith(buf, "add ") || startsWith(buf, "sub ") ||
                  startsWith(buf, "mul ") || startsWith(buf, "div ")) {
@@ -448,7 +447,7 @@ Error: Division by zero
 
 ## **Soal 6**
 
-```
+```C
 else if (strcmp(buf, "yogurt") == 0) {
     int tick;
     char answer[3][100];
